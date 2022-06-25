@@ -17,3 +17,18 @@ export default function routes(app) {
     response.sendFile(resolve('dist', 'main.html'));
   });
 }
+
+/* 
+
+Engineers
+/signup (seed first)
+/login
+/:userid/projects
+/search
+/project/:id - GET
+
+PM
+/login
+/project/:id - POST
+
+*/
