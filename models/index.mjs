@@ -2,9 +2,9 @@ import { Sequelize } from 'sequelize';
 import url from 'url';
 import allConfig from '../config/config.js';
 
-import itemModel from './item.mjs';
-import orderModel from './order.mjs';
-import orderItemModel from './orderItem.mjs';
+// import itemModel from './item.mjs';
+// import orderModel from './order.mjs';
+// import orderItemModel from './orderItem.mjs';
 
 const env = process.env.NODE_ENV || 'development';
 
@@ -34,17 +34,17 @@ if (env === 'production') {
   sequelize = new Sequelize(config.database, config.username, config.password, config);
 }
 
-db.Item = itemModel(sequelize, Sequelize.DataTypes);
-db.Order = orderModel(sequelize, Sequelize.DataTypes);
-db.OrderItem = orderItemModel(sequelize, Sequelize.DataTypes);
+// db.Item = itemModel(sequelize, Sequelize.DataTypes);
+// db.Order = orderModel(sequelize, Sequelize.DataTypes);
+// db.OrderItem = orderItemModel(sequelize, Sequelize.DataTypes);
 
-db.Item.belongsToMany(db.Order, { through: 'order_items' });
-db.Order.belongsToMany(db.Item, { through: 'order_items' });
+// db.Item.belongsToMany(db.Order, { through: 'order_items' });
+// db.Order.belongsToMany(db.Item, { through: 'order_items' });
 
-db.Item.hasMany(db.OrderItem);
-db.OrderItem.belongsTo(db.Item);
-db.Order.hasMany(db.OrderItem);
-db.OrderItem.belongsTo(db.Order);
+// db.Item.hasMany(db.OrderItem);
+// db.OrderItem.belongsTo(db.Item);
+// db.Order.hasMany(db.OrderItem);
+// db.OrderItem.belongsTo(db.Order);
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;
