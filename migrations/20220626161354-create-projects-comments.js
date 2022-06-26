@@ -86,36 +86,7 @@ module.exports = {
         type: Sequelize.DATE,
       },
     });
-    await queryInterface.createTable('user_skills', {
-      id: {
-        allowNull: false,
-        autoIncrement: true,
-        primaryKey: true,
-        type: Sequelize.INTEGER,
-      },
-      user_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'users',
-          key: 'id',
-        },
-      },
-      skill_id: {
-        type: Sequelize.INTEGER,
-        references: {
-          model: 'skills',
-          key: 'id',
-        },
-      },
-      created_at: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-      updated_at: {
-        allowNull: false,
-        type: Sequelize.DATE,
-      },
-    });
+
     await queryInterface.createTable('project_skills', {
       id: {
         allowNull: false,
@@ -149,9 +120,10 @@ module.exports = {
   },
 
   down: async (queryInterface) => {
+    await Promise.all([
+      queryInterface.dropTable('user_projects'),
+      queryInterface.dropTable('project_skills'),
+    ]);
     await queryInterface.dropTable('projects');
-    await queryInterface.dropTable('user_projects');
-    await queryInterface.dropTable('user_skills');
-    await queryInterface.dropTable('project_skills');
   },
 };

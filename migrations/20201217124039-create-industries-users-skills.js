@@ -103,11 +103,44 @@ module.exports = {
         },
       },
     );
+    await queryInterface.createTable('user_skills', {
+      id: {
+        allowNull: false,
+        autoIncrement: true,
+        primaryKey: true,
+        type: Sequelize.INTEGER,
+      },
+      user_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'users',
+          key: 'id',
+        },
+      },
+      skill_id: {
+        type: Sequelize.INTEGER,
+        references: {
+          model: 'skills',
+          key: 'id',
+        },
+      },
+      created_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+      updated_at: {
+        allowNull: false,
+        type: Sequelize.DATE,
+      },
+    });
   },
 
   down: async (queryInterface) => {
-    await queryInterface.dropTable('skills');
-    await queryInterface.dropTable('users');
-    await queryInterface.dropTable('industries');
+    await queryInterface.dropTable('user_skills');
+    await Promise.all([
+      queryInterface.dropTable('skills'),
+      queryInterface.dropTable('users'),
+      queryInterface.dropTable('industries'),
+    ]);
   },
 };
