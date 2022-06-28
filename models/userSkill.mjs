@@ -1,6 +1,6 @@
-export default function initUserSkillModel(sequelize, DataTypes) {
+export default function initUserProjectModel(sequelize, DataTypes) {
   return sequelize.define(
-    'user_skill',
+    'user_project',
     {
       id: {
         allowNull: false,
@@ -15,10 +15,10 @@ export default function initUserSkillModel(sequelize, DataTypes) {
           key: 'id',
         },
       },
-      skillId: {
+      projectId: {
         type: DataTypes.INTEGER,
         references: {
-          model: 'skill',
+          model: 'project',
           key: 'id',
         },
       },

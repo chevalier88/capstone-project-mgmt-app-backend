@@ -1,6 +1,6 @@
-export default function initCommentModel(sequelize, DataTypes) {
+export default function initSkillModel(sequelize, DataTypes) {
   return sequelize.define(
-    'comment',
+    'skill',
     {
       id: {
         allowNull: false,
@@ -8,22 +8,8 @@ export default function initCommentModel(sequelize, DataTypes) {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      userId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'user',
-          key: 'id',
-        },
-      },
-      projectId: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'project',
-          key: 'id',
-        },
-      },
-      text: {
-        type: DataTypes.TEXT,
+      name: {
+        type: DataTypes.STRING,
       },
       createdAt: {
         allowNull: false,
@@ -33,7 +19,6 @@ export default function initCommentModel(sequelize, DataTypes) {
         allowNull: false,
         type: DataTypes.DATE,
       },
-    },
-    { underscored: true },
+    }, { underscored: true },
   );
 }
