@@ -1,6 +1,6 @@
-export default function initCommentModel(sequelize, DataTypes) {
+export default function initUserProjectModel(sequelize, DataTypes) {
   return sequelize.define(
-    'comment',
+    'user_project',
     {
       id: {
         allowNull: false,
@@ -21,9 +21,6 @@ export default function initCommentModel(sequelize, DataTypes) {
           model: 'project',
           key: 'id',
         },
-      },
-      text: {
-        type: DataTypes.TEXT,
       },
       createdAt: {
         allowNull: false,

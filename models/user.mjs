@@ -1,6 +1,6 @@
-export default function orderItemModel(sequelize, DataTypes) {
+export default function initUserModel(sequelize, DataTypes) {
   return sequelize.define(
-    'order_items',
+    'user',
     {
       id: {
         allowNull: false,
@@ -8,28 +8,51 @@ export default function orderItemModel(sequelize, DataTypes) {
         primaryKey: true,
         type: DataTypes.INTEGER,
       },
-      quantity: {
-        type: DataTypes.INTEGER,
+      username: {
+        type: DataTypes.STRING,
       },
-      order_id: {
+      password: {
+        type: DataTypes.STRING,
+      },
+      name: {
+        type: DataTypes.STRING,
+      },
+      email: {
+        type: DataTypes.STRING,
+      },
+      location: {
+        type: DataTypes.STRING,
+      },
+      accountType: {
+        type: DataTypes.ENUM('manager', 'engineer', 'client'),
+      },
+      profilePhoto: {
+        type: DataTypes.STRING,
+      },
+      minimumSalary: {
+        type: DataTypes.DECIMAL(10, 2),
+      },
+      portfolioUrl: {
+        type: DataTypes.STRING,
+      },
+      aboutMe: {
+        type: DataTypes.STRING,
+      },
+      experience: {
+        type: DataTypes.STRING,
+      },
+      industryId: {
         type: DataTypes.INTEGER,
         references: {
-          model: 'orders',
+          model: 'industry',
           key: 'id',
         },
       },
-      item_id: {
-        type: DataTypes.INTEGER,
-        references: {
-          model: 'items',
-          key: 'id',
-        },
-      },
-      created_at: {
+      createdAt: {
         allowNull: false,
         type: DataTypes.DATE,
       },
-      updated_at: {
+      updatedAt: {
         allowNull: false,
         type: DataTypes.DATE,
       },
