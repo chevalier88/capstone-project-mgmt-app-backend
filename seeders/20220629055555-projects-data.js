@@ -78,7 +78,7 @@ module.exports = {
         updated_at: new Date(),
       },
     ];
-    queryInterface.bulkInsert('projects', startingProjects);
+    await queryInterface.bulkInsert('projects', startingProjects);
   },
 
   down: async (queryInterface) => {
