@@ -19,7 +19,7 @@ module.exports = {
     await queryInterface.bulkInsert('comments', startingComments);
   },
 
-  down: async (queryInterface, Sequelize) => {
+  down: async (queryInterface) => {
     await queryInterface.bulkDelete('comments', null);
   },
 };
