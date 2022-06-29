@@ -52,7 +52,7 @@ module.exports = {
         updated_at: new Date(),
       },
     ];
-    queryInterface.bulkInsert('skills', startingSkills);
+    await queryInterface.bulkInsert('skills', startingSkills);
   },
 
   down: async (queryInterface) => {

@@ -27,7 +27,7 @@ module.exports = {
         updated_at: new Date(),
       },
     ];
-    queryInterface.bulkInsert('industries', startingIndustries);
+    await queryInterface.bulkInsert('industries', startingIndustries);
   },
 
   down: async (queryInterface) => {
