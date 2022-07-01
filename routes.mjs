@@ -1,22 +1,20 @@
 import { resolve } from 'path';
 import db from './models/index.mjs';
 
-import initItemsController from './controllers/items.mjs';
-import initOrdersController from './controllers/orders.mjs';
+import initUsersController from './controllers/user.mjs';
 
 export default function routes(app) {
-  const OrdersController = initOrdersController(db);
-  app.post('/orders', OrdersController.create);
-  app.get('/orders', OrdersController.index);
+  const UsersController = initUsersController(db);
 
-  const ItemsController = initItemsController(db);
-  app.get('/items', ItemsController.index);
+  // check login details
+  app.post('/attemptLogin', UsersController.attemptLogin);
 
   // special JS page. Include the webpack index.html file
   app.get('/home', (request, response) => {
     response.sendFile(resolve('dist', 'main.html'));
   });
 }
+<<<<<<< HEAD
 
 /*
 
@@ -32,3 +30,5 @@ PM
 /project/:id - POST
 
 */
+=======
+>>>>>>> c2e038c6a86bd55b2ea41d5d6e2c0bd38268c9ff
