@@ -1,13 +1,18 @@
 import { resolve } from 'path';
 import db from './models/index.mjs';
 
-import initUsersController from './controllers/user.mjs';
+import initUserController from './controllers/user.mjs';
+import initProjectController from './controllers/project.mjs';
 
 export default function routes(app) {
-  const UsersController = initUsersController(db);
+  const UserController = initUserController(db);
+  const ProjectController = initProjectController(db);
 
   // check login details
-  app.post('/attemptLogin', UsersController.attemptLogin);
+  app.post('/attemptLogin', UserController.attemptLogin);
+
+  // get all projects
+  app.get('/projects', ProjectController.getAllProjects);
 
   // special JS page. Include the webpack index.html file
   app.get('/home', (request, response) => {

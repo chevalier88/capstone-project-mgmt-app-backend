@@ -1,5 +1,4 @@
-/* eslint-disable consistent-return */
-export default function initUsersController(db) {
+export default function initUserController(db) {
   const attemptLogin = async (request, response) => {
     console.log('login attempted');
     try {
