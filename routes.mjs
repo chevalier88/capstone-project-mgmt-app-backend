@@ -14,7 +14,6 @@ export default function routes(app) {
     response.sendFile(resolve('dist', 'main.html'));
   });
 }
-<<<<<<< HEAD
 
 /*
 
@@ -30,5 +29,3 @@ PM
 /project/:id - POST
 
 */
-=======
->>>>>>> c2e038c6a86bd55b2ea41d5d6e2c0bd38268c9ff

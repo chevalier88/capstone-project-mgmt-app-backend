@@ -1,8 +1,8 @@
 import cookieParser from 'cookie-parser';
 import express from 'express';
 import methodOverride from 'method-override';
-import bindRoutes from './routes.mjs';
 import cors from 'cors';
+import bindRoutes from './routes.mjs';
 
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
 
@@ -11,7 +11,7 @@ const app = express();
 // Set CORS headers
 app.use(cors({
   credentials: true,
-  origin: FRONTEND_URL
+  origin: FRONTEND_URL,
 }));
 // Set the Express view engine to expect EJS templates
 app.set('view engine', 'ejs');
@@ -32,3 +32,4 @@ bindRoutes(app);
 // Set Express to listen on the given port
 const PORT = process.env.PORT || 3004;
 app.listen(PORT);
+console.log(`listening on ${PORT}...`);
