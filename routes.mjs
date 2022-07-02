@@ -11,7 +11,10 @@ export default function routes(app) {
   // check login details
   app.post('/attemptLogin', UserController.attemptLogin);
 
-  // get all projects
+  // get all completed projects
+  app.get('/projects/completed/:id', ProjectController.getAllCompletedProjectsByUser);
+
+  // get all open projects
   app.get('/projects/open', ProjectController.getAllOpenProjects);
 
   // get all projects

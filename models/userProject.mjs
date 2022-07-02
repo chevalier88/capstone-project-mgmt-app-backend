@@ -1,6 +1,6 @@
 export default function initUserProjectModel(sequelize, DataTypes) {
   return sequelize.define(
-    'user_project',
+    'user_projects',
     {
       id: {
         allowNull: false,
