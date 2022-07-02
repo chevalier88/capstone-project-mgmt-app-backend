@@ -11,6 +11,9 @@ export default function routes(app) {
   // check login details
   app.post('/attemptLogin', UserController.attemptLogin);
 
+  // get all currently enrolled or in-progress projects
+  app.get('/projects/current/:id', ProjectController.getAllCurrentProjectsByUser);
+
   // get all completed projects
   app.get('/projects/completed/:id', ProjectController.getAllCompletedProjectsByUser);
 
