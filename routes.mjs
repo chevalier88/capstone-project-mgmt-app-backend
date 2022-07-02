@@ -12,6 +12,9 @@ export default function routes(app) {
   app.post('/attemptLogin', UserController.attemptLogin);
 
   // get all projects
+  app.get('/projects/open', ProjectController.getAllOpenProjects);
+
+  // get all projects
   app.get('/projects', ProjectController.getAllProjects);
 
   // special JS page. Include the webpack index.html file

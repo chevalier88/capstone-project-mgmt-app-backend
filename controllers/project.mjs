@@ -15,9 +15,28 @@ export default function initProjectController(db) {
       console.log(error);
     }
   };
+  const getAllOpenProjects = async (request, response) => {
+    try {
+      console.log('trying to get all open projects...');
+      const projects = await db.Project.findAll({
+        where: {
+          stage: 'sourcing',
+        },
+        include: [
+          db.Industry,
+        ],
+      });
+      console.log(projects);
+
+      console.log('sending all open projects data to the frontend...');
+      response.send(projects);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return {
     getAllProjects,
-
+    getAllOpenProjects,
   };
 }
