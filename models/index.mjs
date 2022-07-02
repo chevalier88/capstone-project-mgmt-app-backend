@@ -62,8 +62,8 @@ db.UserProject.belongsTo(db.User);
 db.Project.hasMany(db.UserProject);
 db.UserProject.belongsTo(db.Project);
 
-db.User.belongsToMany(db.Project, { through: db.Comment });
-db.Project.belongsToMany(db.User, { through: db.Comment });
+// db.User.belongsToMany(db.Project, { through: db.Comment });
+// db.Project.belongsToMany(db.User, { through: db.Comment });
 
 /*
 To access the "text" attribute from the through (aka join) table "comments",
@@ -71,10 +71,10 @@ we need to define one-to-many associations from the through table to each of its
 We would need to define additional one-to-many relationships between
 the comments table and the users and projects tables respectively.
 */
-db.User.hasMany(db.Comment);
-db.Comment.belongsTo(db.User);
-db.Project.hasMany(db.Comment);
-db.Comment.belongsTo(db.Project);
+// db.User.hasMany(db.Comment);
+// db.Comment.belongsTo(db.User);
+// db.Project.hasMany(db.Comment);
+// db.Comment.belongsTo(db.Project);
 
 db.User.belongsToMany(db.Skill, { through: db.UserSkill });
 db.Skill.belongsToMany(db.User, { through: db.UserSkill });
