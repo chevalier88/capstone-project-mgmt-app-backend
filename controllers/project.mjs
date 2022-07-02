@@ -37,22 +37,25 @@ export default function initProjectController(db) {
 
   const getAllCompletedProjectsByUser = async (request, response) => {
     try {
-      console.log('trying to get all completed projects...');
+      console.log('trying to get all completed projects by user...');
       console.log(`userId: ${request.params.id}`);
-      const projects = await db.Project.findAll({
+      const completedProjects = await db.UserProject.findAll({
         where: {
-          stage: 'completed',
+          userId: request.params.id,
         },
-        include: [
-          db.Industry,
-          db.UserProject,
-        ],
+        include: {
+          model: db.Project,
+          where: {
+            stage: 'completed',
+          },
+          include: db.Industry,
+        },
       });
 
-      console.log(projects);
+      console.log(completedProjects);
+      console.log('sending all completedProjects data to the frontend...');
 
-      console.log('sending all completed projects data to the frontend...');
-      response.send(projects);
+      response.send(completedProjects);
     } catch (error) {
       console.log(error);
     }
