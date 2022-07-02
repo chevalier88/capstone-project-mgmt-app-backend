@@ -1,16 +1,24 @@
 import { resolve } from 'path';
 import db from './models/index.mjs';
 
-import initItemsController from './controllers/items.mjs';
-import initOrdersController from './controllers/orders.mjs';
+import initUserController from './controllers/user.mjs';
+import initProjectController from './controllers/project.mjs';
 
 export default function routes(app) {
-  const OrdersController = initOrdersController(db);
-  app.post('/orders', OrdersController.create);
-  app.get('/orders', OrdersController.index);
+  const UserController = initUserController(db);
+  const ProjectController = initProjectController(db);
 
-  const ItemsController = initItemsController(db);
-  app.get('/items', ItemsController.index);
+  // check login details
+  app.post('/attemptLogin', UserController.attemptLogin);
+
+  // get all completed projects
+  app.get('/projects/completed/:id', ProjectController.getAllCompletedProjectsByUser);
+
+  // get all open projects
+  app.get('/projects/open', ProjectController.getAllOpenProjects);
+
+  // get all projects
+  app.get('/projects', ProjectController.getAllProjects);
 
   // special JS page. Include the webpack index.html file
   app.get('/home', (request, response) => {
@@ -18,7 +26,7 @@ export default function routes(app) {
   });
 }
 
-/* 
+/*
 
 Engineers
 /signup (seed first)

@@ -57,6 +57,11 @@ db.Industry.hasMany(db.Project);
 db.User.belongsToMany(db.Project, { through: db.UserProject });
 db.Project.belongsToMany(db.User, { through: db.UserProject });
 
+db.User.hasMany(db.UserProject);
+db.UserProject.belongsTo(db.User);
+db.Project.hasMany(db.UserProject);
+db.UserProject.belongsTo(db.Project);
+
 db.User.belongsToMany(db.Project, { through: db.Comment });
 db.Project.belongsToMany(db.User, { through: db.Comment });
 
