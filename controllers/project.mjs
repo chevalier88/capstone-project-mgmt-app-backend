@@ -18,18 +18,19 @@ export default function initProjectController(db) {
   const getAllOpenProjects = async (request, response) => {
     try {
       console.log('trying to get all open projects...');
-      const projects = await db.Project.findAll({
+      const allProjects = await db.Project.findAll({
         where: {
           stage: 'sourcing',
         },
         include: [
           db.Industry,
+          db.UserProject,
         ],
       });
-      console.log(projects);
+      console.log(allProjects);
 
-      console.log('sending all open projects data to the frontend...');
-      response.send(projects);
+      console.log('sending all open allProjects data to the frontend...');
+      response.send(allProjects);
     } catch (error) {
       console.log(error);
     }
@@ -46,9 +47,12 @@ export default function initProjectController(db) {
         include: {
           model: db.Project,
           where: {
-            stage: 'completed',
+            stage: ['payment-pending', 'completed'],
           },
-          include: db.Industry,
+          include: [
+            db.Industry,
+            db.UserProject,
+          ],
         },
       });
 
@@ -60,9 +64,63 @@ export default function initProjectController(db) {
       console.log(error);
     }
   };
+
+  const getAllCurrentProjectsByUser = async (request, response) => {
+    try {
+      console.log('trying to get all currently enrolling or in-progress projects by user...');
+      console.log(`userId: ${request.params.id}`);
+      const currentProjects = await db.UserProject.findAll({
+        where: {
+          userId: request.params.id,
+        },
+        include: {
+          model: db.Project,
+          where: {
+            stage: ['sourcing', 'in-progress', 'client-review'],
+          },
+          include: [
+            db.Industry,
+            db.UserProject,
+          ],
+        },
+      });
+
+      console.log(currentProjects);
+      console.log('sending all currentProjects data to the frontend...');
+
+      response.send(currentProjects);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  const getAllUnconfirmedProjects = async (request, response) => {
+    try {
+      console.log('trying to get all unconfirmed projects for Project Manager super-user...');
+      console.log(`userId: ${request.params.id}`);
+      const unconfirmedProjects = await db.Project.findAll({
+        where: {
+          stage: 'contracting',
+        },
+        include: [
+          db.Industry,
+        ],
+      });
+
+      console.log(unconfirmedProjects);
+      console.log('sending all unconfirmedProjects data to the frontend...');
+
+      response.send(unconfirmedProjects);
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
   return {
     getAllProjects,
     getAllOpenProjects,
     getAllCompletedProjectsByUser,
+    getAllCurrentProjectsByUser,
+    getAllUnconfirmedProjects,
   };
 }
