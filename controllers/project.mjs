@@ -24,6 +24,7 @@ export default function initProjectController(db) {
         },
         include: [
           db.Industry,
+          db.UserProject,
         ],
       });
       console.log(allProjects);
@@ -48,7 +49,10 @@ export default function initProjectController(db) {
           where: {
             stage: ['payment-pending', 'completed'],
           },
-          include: db.Industry,
+          include: [
+            db.Industry,
+            db.UserProject,
+          ],
         },
       });
 
@@ -74,7 +78,10 @@ export default function initProjectController(db) {
           where: {
             stage: ['sourcing', 'in-progress', 'client-review'],
           },
-          include: db.Industry,
+          include: [
+            db.Industry,
+            db.UserProject,
+          ],
         },
       });
 
