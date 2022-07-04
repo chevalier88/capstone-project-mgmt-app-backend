@@ -48,12 +48,17 @@ db.Skill = initSkillModel(sequelize, Sequelize.DataTypes);
 db.UserSkill = initUserSkillModel(sequelize, Sequelize.DataTypes);
 db.ProjectSkill = initProjectSkillModel(sequelize, Sequelize.DataTypes);
 
+// ===== One to Many for User and Industry Table
 db.User.belongsTo(db.Industry);
 db.Industry.hasMany(db.User);
+// ==========================
 
+// ===== One to Many for Project and Industry Table
 db.Project.belongsTo(db.Industry);
 db.Industry.hasMany(db.Project);
+// ==========================
 
+// ===== Many to Many for User and Projects Table
 db.User.belongsToMany(db.Project, { through: db.UserProject });
 db.Project.belongsToMany(db.User, { through: db.UserProject });
 
@@ -61,6 +66,7 @@ db.User.hasMany(db.UserProject);
 db.UserProject.belongsTo(db.User);
 db.Project.hasMany(db.UserProject);
 db.UserProject.belongsTo(db.Project);
+// ============================================
 
 // db.User.belongsToMany(db.Project, { through: db.Comment });
 // db.Project.belongsToMany(db.User, { through: db.Comment });
@@ -76,11 +82,27 @@ the comments table and the users and projects tables respectively.
 // db.Project.hasMany(db.Comment);
 // db.Comment.belongsTo(db.Project);
 
+// ===== Many to Many for User and Skills Table
 db.User.belongsToMany(db.Skill, { through: db.UserSkill });
 db.Skill.belongsToMany(db.User, { through: db.UserSkill });
 
+db.User.hasMany(db.UserSkill);
+db.UserSkill.belongsTo(db.User);
+
+db.Skill.hasMany(db.UserSkill);
+db.UserSkill.belongsTo(db.Skill);
+// ==============================
+
+// ==== Many to Many for Project and Skills Table
 db.Project.belongsToMany(db.Skill, { through: db.ProjectSkill });
 db.Skill.belongsToMany(db.Project, { through: db.ProjectSkill });
+
+db.Project.hasMany(db.ProjectSkill);
+db.ProjectSkill.belongsTo(db.Project);
+
+db.Skill.hasMany(db.ProjectSkill);
+db.ProjectSkill.belongsTo(db.Skill);
+// ==============================
 
 db.sequelize = sequelize;
 db.Sequelize = Sequelize;

@@ -1,6 +1,6 @@
 module.exports = {
   development: {
-    username: 'grahamlim',
+    username: 'Eric',
     password: null,
     database: 'project_mgmt_app_development_TEST',
     host: '127.0.0.1',
