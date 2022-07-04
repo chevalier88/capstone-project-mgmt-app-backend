@@ -5,6 +5,7 @@ export default function initProjectController(db) {
       const projects = await db.Project.findAll({
         include: [
           db.Industry,
+          db.UserProject,
         ],
       });
       console.log(projects[0]);
