@@ -1,3 +1,4 @@
+/* eslint-disable consistent-return */
 export default function initUserController(db) {
   const attemptLogin = async (request, response) => {
     console.log('login attempted');
@@ -7,6 +8,10 @@ export default function initUserController(db) {
         where: {
           username: request.body.username,
         },
+        include: [
+          db.Industry,
+          db.Skill,
+        ],
       });
       // set default response obj
       const responseObj = { status: false, user: {} };
