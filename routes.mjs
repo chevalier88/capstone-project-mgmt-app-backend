@@ -3,13 +3,18 @@ import db from './models/index.mjs';
 
 import initUserController from './controllers/user.mjs';
 import initProjectController from './controllers/project.mjs';
+import initSkillController from './controllers/skill.mjs';
 
 export default function routes(app) {
   const UserController = initUserController(db);
   const ProjectController = initProjectController(db);
+  const SkillController = initSkillController(db);
 
   // check login details
   app.post('/attemptLogin', UserController.attemptLogin);
+
+  // get all skills
+  app.get('/skills', SkillController.getAllSkills);
 
   // get all currently enrolled or in-progress projects
   app.get('/projects/current/:id', ProjectController.getAllCurrentProjectsByUser);
@@ -28,18 +33,3 @@ export default function routes(app) {
     response.sendFile(resolve('dist', 'main.html'));
   });
 }
-
-/*
-
-Engineers
-/signup (seed first)
-/login
-/:userid/projects
-/search
-/project/:id - GET
-
-PM
-/login
-/project/:id - POST
-
-*/
