@@ -16,6 +16,9 @@ export default function routes(app) {
   // get all skills
   app.get('/skills', SkillController.getAllSkills);
 
+  // get all skills by users
+  app.get('/skills/users', SkillController.getAllSkillsByUsers);
+
   // get all currently enrolled or in-progress projects
   app.get('/projects/current/:id', ProjectController.getAllCurrentProjectsByUser);
 
