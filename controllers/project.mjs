@@ -118,7 +118,7 @@ export default function initProjectController(db) {
   };
 
   const createNewProject = async (request, response) => {
-    console.log('login controlling printing request...');
+    console.log('attempting to create new Project...');
     console.log(request.body);
     try {
       const {
@@ -318,7 +318,9 @@ export default function initProjectController(db) {
 
       console.log('printing newProjectObject:');
       console.log(newProjectObject);
+      console.log('printing projectSkills:');
       console.log(projectSkills);
+      console.log('printing userProjects:');
       console.log(userProjects);
 
       // const newRequest = await db.Request.create(newProjectObject);
