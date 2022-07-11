@@ -31,6 +31,9 @@ export default function routes(app) {
   // get all projects
   app.get('/projects', ProjectController.getAllProjects);
 
+  // get user data
+  app.get('/userData', UserController.getUserData);
+
   // get all users
   app.get('/users', UserController.getAllUsers);
 

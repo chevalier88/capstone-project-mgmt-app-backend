@@ -2,6 +2,7 @@ import cookieParser from 'cookie-parser';
 import express from 'express';
 import methodOverride from 'method-override';
 import cors from 'cors';
+import dotenv from 'dotenv';
 import bindRoutes from './routes.mjs';
 
 const FRONTEND_URL = process.env.FRONTEND_URL || 'http://localhost:3000';
@@ -28,6 +29,8 @@ app.use(express.static('public'));
 
 // Bind route definitions to the Express application
 bindRoutes(app);
+
+dotenv.config();
 
 // Set Express to listen on the given port
 const PORT = process.env.PORT || 3004;
