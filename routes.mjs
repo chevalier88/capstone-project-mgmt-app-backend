@@ -28,6 +28,9 @@ export default function routes(app) {
   // get all projects
   app.get('/projects', ProjectController.getAllProjects);
 
+  // get all users
+  app.get('/users', UserController.getAllUsers);
+
   // special JS page. Include the webpack index.html file
   app.get('/home', (request, response) => {
     response.sendFile(resolve('dist', 'main.html'));
