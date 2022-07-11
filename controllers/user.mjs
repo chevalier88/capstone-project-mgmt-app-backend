@@ -64,9 +64,25 @@ export default function initUserController(db) {
       }
     });
   };
+  const getAllUsers = async (request, response) => {
+    console.log('getting all users...');
+    try {
+      const users = await db.User.findAll({
+        include: [
+          db.Skill,
+        ],
+      });
+      console.log(users[0]);
+      console.log('sending all users data to the frontend...');
+      response.send(users);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 
   return {
     attemptLogin,
     getUserData,
+    getAllUsers,
   };
 }
