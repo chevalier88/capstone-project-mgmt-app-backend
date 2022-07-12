@@ -323,18 +323,24 @@ export default function initProjectController(db) {
       console.log('printing userProjects:');
       console.log(userProjects);
 
-      // const newRequest = await db.Request.create(newProjectObject);
+      const newProject = await db.Project.create(newProjectObject);
 
-      // const { id } = newRequest;
-      // console.log(`submitted request id: ${id}`);
+      const { id } = newProject;
+      console.log(`submitted request id: ${id}`);
 
-      // await regions.forEach((region) => {
-      //   console.log(region);
-      //   db.RequestRegion.create({
-      //     requestId: id,
-      //     regionId: Number(region),
-      //   });
-      // });
+      await projectSkills.forEach((skill) => {
+        db.ProjectSkill.create({
+          projectId: id,
+          skillId: skill.id,
+        });
+      });
+
+      await userProjects.forEach((user) => {
+        db.UserProject.create({
+          userId: user.id,
+          projectId: id,
+        });
+      });
 
       response.sendStatus(200);
     } catch (error) {
