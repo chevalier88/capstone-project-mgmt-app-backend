@@ -40,6 +40,9 @@ export default function routes(app) {
   // get all users
   app.get('/users', UserController.getAllUsers);
 
+  // update user info
+  app.post('/users/edit/:id', UserController.updateUser);
+
   // special JS page. Include the webpack index.html file
   app.get('/home', (request, response) => {
     response.sendFile(resolve('dist', 'main.html'));
