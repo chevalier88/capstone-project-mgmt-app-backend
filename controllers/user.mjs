@@ -1,3 +1,5 @@
+/* eslint-disable no-unused-vars */
+/* eslint-disable max-len */
 /* eslint-disable consistent-return */
 import Jwt from 'jsonwebtoken';
 import dotenv from 'dotenv';
@@ -80,9 +82,58 @@ export default function initUserController(db) {
     }
   };
 
+  const updateUser = async (request, response) => {
+    console.log('attempting to update user');
+    console.log(request.body);
+    try {
+      const {
+        name,
+        email,
+        location,
+        aboutMe,
+        experience,
+        industryId,
+        portfolioURL,
+        minimumSalary,
+      } = request.body;
+
+      const newUserInfo = {
+        name,
+        email,
+        location,
+        aboutMe,
+        experience,
+        portfolioURL,
+        minimumSalary,
+        industryId: Number(industryId),
+      };
+
+      // update into in User DB
+      const updatedUser = await db.User.update(newUserInfo, { where: { id: request.params.id } });
+
+      // update M:M table User_Skills
+      const deleteUserSkills = await db.UserSkill.destroy(
+        { where: { userId: request.params.id } },
+      );
+      const { skills } = request.body;
+      await skills.forEach((skill) => {
+        db.UserSkill.create({
+          userId: request.params.id,
+          skillId: skill.id,
+        });
+      });
+
+      response.sendStatus(200);
+    } catch (error) {
+      console.log(error);
+      response.send(error);
+    }
+  };
+
   return {
     attemptLogin,
     getUserData,
     getAllUsers,
+    updateUser,
   };
 }
