@@ -406,11 +406,15 @@ export default function initProjectController(db) {
           id: projectId,
         },
       });
+
       console.log(deletedUserProjectEntries);
       console.log(deletedProjectSkillEntries);
       console.log(deletedProject);
+
+      response.sendStatus(200);
     } catch (error) {
       console.log(error);
+      response.sendStatus(500);
     }
   };
   return {
