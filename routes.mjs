@@ -37,6 +37,9 @@ export default function routes(app) {
   // get all the users in 1 selected project being viewed
   app.get('/project/:id', ProjectController.getAllUsersAndSkillsByProjectID);
 
+  // delete one project and all associated join table queries
+  app.delete('/project/:id', ProjectController.deleteOneProject);
+
   // get user data
   app.get('/userData', UserController.getUserData);
 
