@@ -382,6 +382,37 @@ export default function initProjectController(db) {
       console.log(error);
     }
   };
+  const deleteOneProject = async (request, response) => {
+    try {
+      console.log('deleting one project...');
+      const projectId = request.params.id;
+      console.log('printing projectId...');
+      console.log(projectId);
+
+      const deletedUserProjectEntries = await db.UserProject.destroy({
+        where: {
+          projectId: request.params.id,
+        },
+      });
+
+      const deletedProjectSkillEntries = await db.ProjectSkill.destroy({
+        where: {
+          projectId: request.params.id,
+        },
+      });
+
+      const deletedProject = await db.Project.destroy({
+        where: {
+          id: projectId,
+        },
+      });
+      console.log(deletedUserProjectEntries);
+      console.log(deletedProjectSkillEntries);
+      console.log(deletedProject);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return {
     getAllProjects,
     getAllOpenProjects,
@@ -390,5 +421,6 @@ export default function initProjectController(db) {
     getAllUnconfirmedProjects,
     createNewProject,
     getAllUsersAndSkillsByProjectID,
+    deleteOneProject,
   };
 }
