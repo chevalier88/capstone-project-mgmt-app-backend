@@ -348,6 +348,40 @@ export default function initProjectController(db) {
       response.send(error);
     }
   };
+
+  const getAllUsersAndSkillsByProjectID = async (request, response) => {
+    try {
+      console.log('trying to get all users and skills associated with this project...');
+      console.log(`projectId: ${request.params.id}`);
+      const usersSkillsForThisProject = {};
+
+      const usersInThisProject = await db.UserProject.findAll({
+        where: {
+          projectId: request.params.id,
+        },
+        include: {
+          model: db.User,
+        },
+      });
+      const skillsInThisProject = await db.ProjectSkill.findAll({
+        where: {
+          projectId: request.params.id,
+        },
+        include: {
+          model: db.Skill,
+        },
+      });
+
+      usersSkillsForThisProject.users = usersInThisProject;
+      usersSkillsForThisProject.skills = skillsInThisProject;
+
+      console.log('sending all usersSkillsForThisProject data to the frontend...');
+      console.log(usersSkillsForThisProject);
+      response.send(usersSkillsForThisProject);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return {
     getAllProjects,
     getAllOpenProjects,
@@ -355,5 +389,6 @@ export default function initProjectController(db) {
     getAllCurrentProjectsByUser,
     getAllUnconfirmedProjects,
     createNewProject,
+    getAllUsersAndSkillsByProjectID,
   };
 }

@@ -34,6 +34,9 @@ export default function routes(app) {
   // create one project
   app.post('/project', ProjectController.createNewProject);
 
+  // get all the users in 1 selected project being viewed
+  app.get('/project/:id', ProjectController.getAllUsersAndSkillsByProjectID);
+
   // get user data
   app.get('/userData', UserController.getUserData);
 
