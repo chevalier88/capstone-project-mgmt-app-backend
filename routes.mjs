@@ -40,6 +40,9 @@ export default function routes(app) {
   // delete one project and all associated join table queries
   app.delete('/project/:id', ProjectController.deleteOneProject);
 
+  // update project stage by id
+  app.put('/project/:id', ProjectController.updateProjectStage);
+
   // get user data
   app.get('/userData', UserController.getUserData);
 

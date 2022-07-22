@@ -417,6 +417,34 @@ export default function initProjectController(db) {
       response.sendStatus(500);
     }
   };
+
+  const updateProjectStage = async (request, response) => {
+    try {
+      console.log('receiving update 1 project...');
+      console.log(request.body);
+
+      const projectId = Number(request.body.projectId);
+      const { newStage } = request.body;
+
+      // const updateOneRequest = await db.Project.update(
+      //   {
+      //     stage : newStage,
+      //   },
+      //   {
+      //     where: {
+      //       id: projectId,
+      //     },
+      //   },
+      // );
+      // console.log(updateOneRequest);
+      // response.send(updateOneRequest);
+
+      console.log(projectId);
+      console.log(newStage);
+    } catch (error) {
+      console.log(error);
+    }
+  };
   return {
     getAllProjects,
     getAllOpenProjects,
@@ -426,5 +454,6 @@ export default function initProjectController(db) {
     createNewProject,
     getAllUsersAndSkillsByProjectID,
     deleteOneProject,
+    updateProjectStage,
   };
 }
