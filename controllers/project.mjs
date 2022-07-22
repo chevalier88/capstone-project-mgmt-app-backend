@@ -479,20 +479,8 @@ export default function initProjectController(db) {
       console.log('kanban - printing request.body.kanbanData second lane object...');
       console.log(request.body.kanbanData.lanes[1].cards);
 
-      // const { kanbanData } = request.body.kanbanData;
-
-      // const kanbanDataUpdate = await db.Project.update(JSON.stringify(kanbanData), {
-      //   where: {
-      //     id: request.params.id,
-      //   },
-      //   returning: true,
-      // });
-      // console.log(kanbanDataUpdate);
-      // response.send(kanbanDataUpdate);
-
       const project = await db.Project.findOne({ where: { id: request.body.id } });
 
-      // project.kanbanData = {...project.kanbanData, request.body.kanbanData}
       console.log(project);
       console.log(Object.keys(project));
       console.log(project.stage);
