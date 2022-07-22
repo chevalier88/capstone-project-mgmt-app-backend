@@ -445,6 +445,31 @@ export default function initProjectController(db) {
       console.log(error);
     }
   };
+
+  const addCurrentUserToProject = async (request, response) => {
+    console.log('attempting to add User to existing Project...');
+    console.log(request.body);
+    try {
+      const {
+        userId,
+        projectId,
+      } = request.body;
+
+      const newUserAssignedToProjectObject = {
+        userId,
+        projectId,
+      };
+
+      const addUserToProject = await db.UserProject.create(newUserAssignedToProjectObject);
+
+      console.log(addUserToProject);
+      response.sendStatus(addUserToProject);
+    } catch (error) {
+      console.log(error);
+      response.sendStatus(500);
+    }
+  };
+
   return {
     getAllProjects,
     getAllOpenProjects,
@@ -455,5 +480,6 @@ export default function initProjectController(db) {
     getAllUsersAndSkillsByProjectID,
     deleteOneProject,
     updateProjectStage,
+    addCurrentUserToProject,
   };
 }

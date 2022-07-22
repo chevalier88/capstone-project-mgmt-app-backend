@@ -43,6 +43,9 @@ export default function routes(app) {
   // update project stage by id
   app.put('/project/:id', ProjectController.updateProjectStage);
 
+  // update project stage by id
+  app.post('/project/enrol-user/:id', ProjectController.addCurrentUserToProject);
+
   // get user data
   app.get('/userData', UserController.getUserData);
 
