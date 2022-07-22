@@ -86,7 +86,7 @@ module.exports = {
         email: 'graham.lim2018@gmail.com',
         location: 'Singapore',
         account_type: 'manager',
-        profile_photo: '',
+        profile_photo: 'https://cdn-icons-png.flaticon.com/512/147/147144.png',
         minimum_salary: 40.0,
         portfolio_url: 'https://github.com/chevalier88',
         about_me: 'Hi, I am a Project Manager!',
@@ -102,7 +102,7 @@ module.exports = {
         email: 'fakeemail@gmail.com',
         location: 'Singapore',
         account_type: 'client',
-        profile_photo: '',
+        profile_photo: 'https://cdn-icons-png.flaticon.com/512/147/147144.png',
         minimum_salary: 0.0,
         portfolio_url: 'https://www.youtube.com/watch?v=QH2-TGUlwu4',
         about_me: 'I want people to code for me, and I will pay a reasonable amount.',
@@ -135,8 +135,8 @@ module.exports = {
     await Promise.all([
       queryInterface.bulkInsert('projects', moreProjects),
       queryInterface.bulkInsert('users', moreUsers),
-      queryInterface.bulkInsert('user_projects', moreUserProjects),
     ]);
+    await queryInterface.bulkInsert('user_projects', moreUserProjects);
   },
 
   down: async (queryInterface) => {
