@@ -426,18 +426,18 @@ export default function initProjectController(db) {
       const projectId = Number(request.body.projectId);
       const { newStage } = request.body;
 
-      // const updateOneRequest = await db.Project.update(
-      //   {
-      //     stage : newStage,
-      //   },
-      //   {
-      //     where: {
-      //       id: projectId,
-      //     },
-      //   },
-      // );
-      // console.log(updateOneRequest);
-      // response.send(updateOneRequest);
+      const updateOneRequest = await db.Project.update(
+        {
+          stage: newStage,
+        },
+        {
+          where: {
+            id: projectId,
+          },
+        },
+      );
+      console.log(updateOneRequest);
+      response.send(updateOneRequest);
 
       console.log(projectId);
       console.log(newStage);
