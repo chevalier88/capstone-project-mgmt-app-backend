@@ -418,6 +418,30 @@ export default function initProjectController(db) {
     }
   };
 
+  const addCurrentUserToProject = async (request, response) => {
+    console.log('attempting to add User to existing Project...');
+    console.log(request.body);
+    try {
+      const {
+        userId,
+        projectId,
+      } = request.body;
+
+      const newUserAssignedToProjectObject = {
+        userId,
+        projectId,
+      };
+
+      const addUserToProject = await db.UserProject.create(newUserAssignedToProjectObject);
+
+      console.log(addUserToProject);
+      response.sendStatus(addUserToProject);
+    } catch (error) {
+      console.log(error);
+      response.sendStatus(500);
+    }
+  };
+
   const updateProjectStage = async (request, response) => {
     try {
       console.log('receiving update 1 project...');
@@ -446,30 +470,40 @@ export default function initProjectController(db) {
     }
   };
 
-  const addCurrentUserToProject = async (request, response) => {
-    console.log('attempting to add User to existing Project...');
-    console.log(request.body);
+  const updateKanbanData = async (request, response) => {
     try {
-      const {
-        userId,
-        projectId,
-      } = request.body;
+      console.log('kanban - printing request.body...');
+      console.log(request.body);
+      console.log('kanban - printing request.body.kanbanData...');
+      console.log(request.body.kanbanData);
+      console.log('kanban - printing request.body.kanbanData second lane object...');
+      console.log(request.body.kanbanData.lanes[1].cards);
 
-      const newUserAssignedToProjectObject = {
-        userId,
-        projectId,
-      };
+      // const { kanbanData } = request.body.kanbanData;
 
-      const addUserToProject = await db.UserProject.create(newUserAssignedToProjectObject);
+      // const kanbanDataUpdate = await db.Project.update(JSON.stringify(kanbanData), {
+      //   where: {
+      //     id: request.params.id,
+      //   },
+      //   returning: true,
+      // });
+      // console.log(kanbanDataUpdate);
+      // response.send(kanbanDataUpdate);
 
-      console.log(addUserToProject);
-      response.sendStatus(addUserToProject);
+      const project = await db.Project.findOne({ where: { id: request.body.id } });
+
+      // project.kanbanData = {...project.kanbanData, request.body.kanbanData}
+      console.log(project);
+      console.log(Object.keys(project));
+      console.log(project.stage);
+
+      await project.update({ kanbanData: request.body.kanbanData });
+
+      response.sendStatus(200);
     } catch (error) {
       console.log(error);
-      response.sendStatus(500);
     }
   };
-
   return {
     getAllProjects,
     getAllOpenProjects,
@@ -481,5 +515,6 @@ export default function initProjectController(db) {
     deleteOneProject,
     updateProjectStage,
     addCurrentUserToProject,
+    updateKanbanData,
   };
 }

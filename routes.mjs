@@ -46,6 +46,9 @@ export default function routes(app) {
   // update project stage by id
   app.post('/project/enrol-user/:id', ProjectController.addCurrentUserToProject);
 
+  // update kanban data
+  app.put('/project/update-kanban/:id', ProjectController.updateKanbanData);
+
   // get user data
   app.get('/userData', UserController.getUserData);
 
