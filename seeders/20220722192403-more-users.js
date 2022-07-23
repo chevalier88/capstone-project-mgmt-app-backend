@@ -1,0 +1,191 @@
+module.exports = {
+  up: async (queryInterface) => {
+    const moreUsers = [
+      {
+        username: 'Diyana',
+        password: 'abc123',
+        name: 'Diyana',
+        email: 'fakeemail@gmail.com',
+        location: 'London',
+        account_type: 'engineer',
+        profile_photo: 'https://i.pinimg.com/originals/a6/58/32/a65832155622ac173337874f02b218fb.png',
+        minimum_salary: 100.0,
+        portfolio_url: 'https://www.youtube.com/watch?v=QH2-TGUlwu4',
+        about_me: 'I love to code.',
+        experience: 'Loving life',
+        industry_id: 5,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        username: 'Kimmi',
+        password: 'abc123',
+        name: 'Kimmi',
+        email: 'fakeemail@gmail.com',
+        location: 'Seoul',
+        account_type: 'engineer',
+        profile_photo: 'https://cdn.icon-icons.com/icons2/2643/PNG/512/female_woman_person_people_avatar_icon_159366.png',
+        minimum_salary: 99.0,
+        portfolio_url: 'https://www.youtube.com/watch?v=QH2-TGUlwu4',
+        about_me: 'I love to code.',
+        experience: 'Loving life',
+        industry_id: 5,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        username: 'Zaver',
+        password: 'abc123',
+        name: 'Zaver',
+        email: 'fakeemail@gmail.com',
+        location: 'Los Angeles',
+        account_type: 'engineer',
+        profile_photo: 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png',
+        minimum_salary: 188.0,
+        portfolio_url: 'https://www.youtube.com/watch?v=QH2-TGUlwu4',
+        about_me: 'I love to code.',
+        experience: 'Loving life',
+        industry_id: 5,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        username: 'CK',
+        password: 'abc123',
+        name: 'CK',
+        email: 'fakeemail@gmail.com',
+        location: 'Singapore',
+        account_type: 'engineer',
+        profile_photo: 'https://cdn.iconscout.com/icon/free/png-256/avatar-370-456322.png',
+        minimum_salary: 888.0,
+        portfolio_url: 'https://www.youtube.com/watch?v=QH2-TGUlwu4',
+        about_me: 'I love to code.',
+        experience: 'Loving life',
+        industry_id: 5,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+    ];
+    const moreUserSkills = [
+      {
+        user_id: 6,
+        skill_id: 1,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 6,
+        skill_id: 2,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 6,
+        skill_id: 3,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 6,
+        skill_id: 4,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 6,
+        skill_id: 5,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 6,
+        skill_id: 6,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 7,
+        skill_id: 1,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 7,
+        skill_id: 2,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 7,
+        skill_id: 3,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 7,
+        skill_id: 4,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 7,
+        skill_id: 5,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 7,
+        skill_id: 6,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 8,
+        skill_id: 7,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 8,
+        skill_id: 8,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 8,
+        skill_id: 9,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 8,
+        skill_id: 10,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 9,
+        skill_id: 9,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+      {
+        user_id: 9,
+        skill_id: 10,
+        created_at: new Date(),
+        updated_at: new Date(),
+      },
+    ];
+    await Promise.all([
+      queryInterface.bulkInsert('users', moreUsers),
+    ]);
+    await queryInterface.bulkInsert('user_skills', moreUserSkills);
+  },
+
+  down: async (queryInterface) => {
+    await queryInterface.dropTable('user_skills');
+    await Promise.all([
+      queryInterface.dropTable('users'),
+    ]);
+  },
+};
