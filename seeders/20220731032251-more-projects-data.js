@@ -1,5 +1,6 @@
+/* eslint-disable import/no-extraneous-dependencies */
 /* eslint-disable no-plusplus */
-import { faker } from '@faker-js/faker';
+const { faker } = require('@faker-js/faker');
 
 module.exports = {
   up: async (queryInterface) => {
@@ -177,10 +178,10 @@ module.exports = {
     const moreProjectsSkillsArray = [];
 
     for (let i = 5; i < 16; i++) {
-      // adds more projects starting from i = 5, because we already have 4 projects
+    // adds more projects starting from i = 5, because we already have 4 projects
       moreProjectsArray.push({
-        name: `${faker.name.jobTitle} ${faker.animal} App`,
-        summary: faker.lorem,
+        name: `${faker.name.jobTitle()} ${faker.animal.dog()} App`,
+        summary: faker.lorem.sentence(),
         no_engineers_required: Math.ceil(Math.random() * 5),
         minimum_salary: 45.00,
         enrolment_deadline: new Date('October 30, 2022 00:00:00'),
@@ -210,7 +211,7 @@ module.exports = {
     );
   },
 
-  down: async (queryInterface) => {
+  async down(queryInterface) {
     await queryInterface.bulkDelete('project_skills', null);
     await queryInterface.bulkDelete('projects', null);
   },
