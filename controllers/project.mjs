@@ -6,6 +6,8 @@ export default function initProjectController(db) {
         include: [
           db.Industry,
           db.UserProject,
+          db.ProjectSkill,
+          db.Skill,
         ],
       });
       console.log(projects[0]);
@@ -26,6 +28,8 @@ export default function initProjectController(db) {
         include: [
           db.Industry,
           db.UserProject,
+          db.ProjectSkill,
+          db.Skill,
         ],
       });
       console.log(allProjects);
