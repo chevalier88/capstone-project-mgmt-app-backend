@@ -74,7 +74,6 @@ export default function initUserController(db) {
           db.Skill,
         ],
       });
-      console.log(users[0]);
       console.log('sending all users data to the frontend...');
       response.send(users);
     } catch (error) {
